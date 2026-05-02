@@ -61,6 +61,14 @@ export default function Planner() {
       })
 
       const data = await response.json()
+      if (!response.ok) {
+        setError(
+          typeof data.error === "string"
+            ? data.error
+            : "Could not generate tasks. Try again!"
+        )
+        return
+      }
       if (data.tasks) {
         setTasks(data.tasks)
 
